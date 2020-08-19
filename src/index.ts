@@ -1,2 +1,2 @@
-let num:number = 123
-alert('hello')
+import  "./interface/interface";
+import  "./class/class";
