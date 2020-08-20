@@ -57,12 +57,57 @@ namespace $interface {
     // console.log(mySquare);
 }
 
-namespace $interface {
-    
-    let myArray: string[];
-    myArray = ["Bob", "Fred"];
 
-    let myStr: string = myArray[0]
+namespace $interface {
+    //函数参数 兼容一些未知参数 方法2 接口断言
+    interface SquareConfig {
+        color?: string;
+        width?: number;
+    }
+
+    function createSquare(config: SquareConfig): { color: string; area: number } {
+        return {
+            color: "1",
+            area: 100
+        }
+    }
+    // obj没有定义，但是可以传入
+    let mySquare = createSquare({ color: "999", width: 100, obj: { name: 123 } } as SquareConfig);
+    // console.log(333,mySquare);
+}
+
+// 可索引的类型
+namespace $interface {
+
+    interface StringArray {
+        [index: string]: string; //这个例子：其实就是校验索引和值类型，对象的话 索引必须是 字符串，值必须是 字符串
+    }
+
+    let myArray: StringArray;
+    myArray = {
+        p:"100", 
+        // p2:100,  报错：值是number,定义的是字符串
+
+    };
+
+    let myStr: string = myArray["p"];
     console.log(myStr);
 
+}
+
+// 函数类型
+namespace $interface {
+    // 其实就是定义 参数的类型和 返回值的类型
+    interface SearchFunc {
+        (source: string, subString: string): boolean;
+    }
+
+    let mySearch: SearchFunc;
+    //参数名不需要一样
+    mySearch = function (src, sub) {
+        let result = src.search(sub);
+        return result > -1;
+    }
+
+    // console.log(mySearch(100,200));  //报错：类型不同
 }

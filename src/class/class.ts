@@ -22,7 +22,7 @@ namespace $class {
     }
 
     let howard = new Employee("Howard", "Sales");
-    console.log(howard.getElevatorPitch());
+    // console.log(howard.getElevatorPitch());
 
 }
 
@@ -47,11 +47,53 @@ namespace $class {
     }
 
     let dad = new Octopus("Man with the 8 strong legs");
-    console.log(dad.name); // Man with the 8 strong legs
+    // console.log(dad.name); // Man with the 8 strong legs
     // dad.name = "Man with the 3-piece suit"; // 错误! name 是只读的.
 }
 
+// 抽象类
+namespace $class {
+    abstract class Department {
+
+        constructor(public name: string) {
+        }
+    
+        printName(): void {
+            // console.log('Department name: ' + this.name);
+        }
+        abstract ago:number;
+        abstract printMeeting(): void; // 必须在派生类中实现
+    }
+
+    class AccountingDepartment extends Department {
+        public ago:number
+        constructor() {
+            super('Accounting and Auditing'); // 在派生类的构造函数中必须调用 super()
+            this.ago = 22;
+        }
+        printMeeting(): void {
+            console.log('The Accounting Department meets each Monday at 10am.');
+        }
+    }
+
+}
 
 namespace $class {
-
+    
+     class A{
+         public ago: any
+    }
+    interface ClockInterface extends A {
+        currentTime: Date;
+    }
+    
+    
+    class Clock implements ClockInterface {
+        currentTime: Date;
+        ago:any;
+        constructor(h: number, m: number) {
+            this.currentTime = new Date();
+            this.ago = 100
+         }
+    }
 }
